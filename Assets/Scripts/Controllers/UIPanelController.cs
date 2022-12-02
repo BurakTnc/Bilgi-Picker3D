@@ -23,12 +23,16 @@ public class UIPanelController : MonoBehaviour
 
     private void SubscribeEvents()
     {
-
+        CoreUISignals.instance.OnOpenPanel += OnOpenPanel;
+        CoreUISignals.instance.OnClosePanel += OnClosePanel;
+        CoreUISignals.instance.OnCloseAllPanel += OnCloseAllPanels;
     }
 
     private void UnSubscribeEvents()
     {
-
+        CoreUISignals.instance.OnOpenPanel -= OnOpenPanel;
+        CoreUISignals.instance.OnClosePanel -= OnClosePanel;
+        CoreUISignals.instance.OnCloseAllPanel -= OnCloseAllPanels;
     }
 
     private void OnDisable()
@@ -46,7 +50,7 @@ public class UIPanelController : MonoBehaviour
     {
         if (layers[layerValue].childCount>0)
         {
-            Destroy(layers[layerValue].gameObject);
+            Destroy(layers[layerValue].GetChild(0).gameObject);
         }
     }
 
